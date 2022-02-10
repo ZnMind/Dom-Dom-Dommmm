@@ -33,18 +33,20 @@ function addSquare() {
 
     newDiv.addEventListener('dblclick', function(event) {
         let doubleClickId = event.target.id;
-        if (doubleClickId == 1) {
-            alert('This is the first square!');
-        } else if (doubleClickId == squareCount) {
-            alert('This is the last square');
-        } else if (doubleClickId % 2 == 0) {
-            let plusOne = parseInt(event.target.id) + 1;
-            let element = document.getElementById(plusOne);
-            element.parentNode.removeChild(element);
+        if (doubleClickId % 2 == 0) {
+            if (this.nextSibling != null) {
+                let element = document.getElementById(this.nextElementSibling.id);
+                element.parentNode.removeChild(element);
+            } else {
+                alert('This is the last square!');
+            }
         } else {
-            let minusOne = parseInt(event.target.id) - 1;
-            let element = document.getElementById(minusOne);
-            element.parentNode.removeChild(element);
+            if (this.previousSibling.id != null) {
+                let element = document.getElementById(this.previousSibling.id);
+                element.parentNode.removeChild(element);
+            } else {
+                alert('This is the first square!');
+            }
         }
     })
 }
